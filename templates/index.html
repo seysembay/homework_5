@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Education IT</title>
+    <style>
+        .posts {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .card {
+            border: 1px solid rgba(0, 0, 0, .125);
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+        .card-body {
+            padding: 1.25rem;
+        }
+
+        .card-title {
+            cursor: pointer;
+            color: blueviolet;
+        }
+
+        .card-title:hover {
+            color: darkred;
+        }
+
+        .card-text {
+            font-family: "Roboto Thin", serif;
+        }
+    </style>
+</head>
+<body>
+<div id="posts" class="posts">
+
+</div>
+<script>
+    let posts = document.getElementById('posts')
+    let my_posts = [
+        {id: 1, title: 'JavaScript', description: 'Язык программирования, который применяется на фронте бла бла бла'},
+        {
+            id: 2,
+            title: 'Python',
+            description: 'Язык программирования, который применяется для веб разработки, ПО и data analytics'
+        },
+        {id: 3, title: 'PHP', description: 'Язык программирования предназначенный для веб разработки'},
+        {
+            id: 4,
+            title: 'Laravel',
+            description: 'Фреймврок написанный на языке программирования php, предоставляет очень много функционала из коробки и зачительно ускоряет разработку'
+        },
+        {
+            id: 5,
+            title: 'Django',
+            description: 'Фреймврок написанный на языке программирования python, предоставляет очень много функционала из коробки и зачительно ускоряет разработку'
+        },
+    ]
+
+    function openPost(post_id) {
+        localStorage.clear()
+        let current_post = my_posts.filter(item => item.id === post_id)[0]
+        localStorage.setItem("current_post", JSON.stringify(current_post))
+        let link = document.createElement('a')
+        link.href = 'post.html'
+        link.click()
+    }
+
+    function getTemplate(post) {
+        return `<div class="card">
+          <div class="card-body">
+            <h4 class="card-title" onclick="openPost(${post.id})">${post.title}</h4>
+            <p class="card-text">${post.description}</p>
+          </div>
+        </div>`
+    }
+
+    function render() {
+        for (let i = 0; i < my_posts.length; i++) {
+            posts.insertAdjacentHTML('beforeend', getTemplate(my_posts[i]))
+        }
+
+    }
+
+    render()
+
+</script>
+</body>
+</html>

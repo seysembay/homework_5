@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .post{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #post_id{
+            color: darkred;
+            font-size: 20px;
+        }
+        #post_description{
+            font-family: Serif,serif;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+<button onclick="window.history.go(-1); return false;">Назад</button>
+<div class="post">
+    <div id="post_id"></div>
+    <div id="post_description"></div>
+</div>
+<script>
+    let {id, title, description} = JSON.parse(localStorage.getItem('current_post'))
+    if (title) document.title = title
+    if (id) document.getElementById('post_id').innerText = `${id} - ${title}`
+    if (description) document.getElementById('post_description').innerText = `Описание - ${description}`
+</script>
+</body>
+</html>
